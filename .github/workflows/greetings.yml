@@ -9,8 +9,18 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-    - uses: actions/first-interaction@v1
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        issue-message: "Message that will be displayed on users' first issue"
-        pr-message: "Message that will be displayed on users' first pull request"
+      - uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          pr-message: >
+            Hello there! :wave:
+
+            Thank you for your contribution to Football Transfermarkt! :tada: :soccer:
+
+            It's great to have you here! We appreciate your help and look forward to your valuable input. 
+
+            Please make sure you have followed our contributing guidelines and your PR adheres to our code of conduct. 
+
+            Our team will review your PR soon. If there are any issues, we will provide feedback in the review comments.
+
+            Happy coding! :computer:
