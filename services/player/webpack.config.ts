@@ -8,9 +8,6 @@ interface EnvVariables {
     analyzer?: boolean;
     port?: number;
     platform?: BuildPlatform;
-    PLAYER_REMOTE_URL?: string;
-    PLAYERS_REMOTE_URL?: string;
-    CLUBS_REMOTE_URL?: string;
 }
 
 export default (env: EnvVariables) => {
@@ -21,12 +18,9 @@ export default (env: EnvVariables) => {
         public: path.resolve(__dirname, 'public'),
         src: path.resolve(__dirname, 'src'),
     }
-    const PLAYER_REMOTE_URL = env.PLAYER_REMOTE_URL ?? 'http://localhost:3001';
-    const PLAYERS_REMOTE_URL = env.PLAYERS_REMOTE_URL ?? 'http://localhost:3002';
-    const CLUBS_REMOTE_URL = env.CLUBS_REMOTE_URL ?? 'http://localhost:3003';
 
     const config: webpack.Configuration = buildWebpack({
-        port: env.port ?? 3000,
+        port: env.port ?? 3001,
         mode: env.mode ?? 'development',
         paths,
         analyzer: env.analyzer,
@@ -34,27 +28,24 @@ export default (env: EnvVariables) => {
     })
 
     config.plugins.push(new webpack.container.ModuleFederationPlugin({
-        name: 'host',
+        name: 'player',
         filename: 'remoteEntry.js',
-
-        remotes: {
-            player: `player@${PLAYER_REMOTE_URL}/remoteEntry.js`,
-            players: `players@${PLAYERS_REMOTE_URL}/remoteEntry.js`,
-            clubs: `clubs@${CLUBS_REMOTE_URL}/remoteEntry.js`,
+        exposes: {
+            './Router': './src/router/Router.tsx',
         },
         shared: {
             ...packageJson.dependencies,
             react: {
                 eager: true,
-                // requiredVersion: packageJson.dependencies['react'],
+                requiredVersion: packageJson.dependencies['react'],
             },
             'react-router-dom': {
                 eager: true,
-                // requiredVersion: packageJson.dependencies['react-router-dom'],
+                requiredVersion: packageJson.dependencies['react-router-dom'],
             },
             'react-dom': {
                 eager: true,
-                // requiredVersion: packageJson.dependencies['react-dom'],
+                requiredVersion: packageJson.dependencies['react-dom'],
             },
         },
     }))
