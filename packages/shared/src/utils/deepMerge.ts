@@ -1,3 +1,1 @@
-export function deepMerge() {
-    // реализация
-}
+export function deepMerge() {}

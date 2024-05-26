@@ -1,5 +1,7 @@
 {
   "name": "@packages/shared",
+  "author": "petrokulko@gmail.com",
+  "description": "Shared code for microfrontend services",
   "version": "1.0.0",
   "main": "./src/index.ts"
 }
