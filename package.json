@@ -1,5 +1,7 @@
 {
-  "name": "monorepo-module-federation",
+  "name": "football-transfermarkt",
+  "author": "petrokulko@gmail.com",
+  "description": "Football Transfermarkt is a resource built on a microfrontend architecture to provide information about football teams.",
   "version": "1.0.0",
   "workspaces": [
     "packages/*",

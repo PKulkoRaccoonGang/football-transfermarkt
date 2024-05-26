@@ -2,7 +2,7 @@ import {ModuleOptions} from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ReactRefreshTypeScript from "react-refresh-typescript";
 import {BuildOptions} from "./types/types";
-import {buildBabelLoader} from "./babel/buildBabelLoader";
+// import {buildBabelLoader} from "./babel/buildBabelLoader";
 
 export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     const isDev = options.mode === 'development';
@@ -58,8 +58,6 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
 
 
     const tsLoader = {
-        // ts-loader умеет работать с JSX
-        // Если б мы не использовали тайпскрипт: нужен был бы babel-loader
         exclude: /node_modules/,
         test: /\.tsx?$/,
         use: [

@@ -1,5 +1,7 @@
 {
   "name": "@packages/build-config",
+  "author": "petrokulko@gmail.com",
+  "description": "Webpack configuration for React/TypeScript projects",
   "version": "1.0.0",
   "main": "./src/index.ts",
   "devDependencies": {
