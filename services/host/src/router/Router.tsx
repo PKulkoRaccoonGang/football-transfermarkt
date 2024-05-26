@@ -1,17 +1,20 @@
 import {createBrowserRouter} from "react-router-dom";
 import {App} from "@/components/App/App";
 // @ts-ignore
-import shopRoutes from 'shop/Router';
+import playerRoutes from 'player/Router';
 // @ts-ignore
-import adminRoutes from 'admin/Router';
+import playersRoutes from 'players/Router';
+// @ts-ignore
+import clubsRoutes from 'clubs/Router';
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
         children: [
-            ...shopRoutes,
-            ...adminRoutes,
+            ...playerRoutes,
+            ...playersRoutes,
+            ...clubsRoutes,
         ]
     },
 ]);

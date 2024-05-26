@@ -1,12 +1,10 @@
 {
-  "name": "host",
+  "name": "player",
   "version": "1.0.0",
   "dependencies": {
-    "@packages/build-config": "*",
     "@packages/shared": "*",
-    "bootstrap": "^5.3.3",
+    "@packages/build-config": "*",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0"
   },
