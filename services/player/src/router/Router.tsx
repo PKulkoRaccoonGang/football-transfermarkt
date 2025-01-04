@@ -1,6 +1,7 @@
-import {createBrowserRouter} from "react-router-dom";
-import {App} from "@/components/App/App";
 import {Suspense} from "react";
+import {createBrowserRouter} from "react-router-dom";
+
+import {App} from "@/components/App/App";
 import {Player} from "@/pages/Player";
 import {UserCard} from "@packages/shared/src/components/UserCard";
 

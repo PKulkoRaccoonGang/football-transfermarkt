@@ -3,8 +3,14 @@
   "author": "petrokulko@gmail.com",
   "description": "Football Transfermarkt is a resource built on a microfrontend architecture to provide information about football teams.",
   "version": "1.0.0",
+  "scripts": {
+    "start": "npm run start:all",
+    "start:all": "npm run start -w services/clubs & npm run start -w services/host & npm run start -w services/player & npm run start -w services/players"
+  },
   "workspaces": [
-    "packages/*",
-    "services/*"
+    "services/clubs",
+    "services/host",
+    "services/player",
+    "services/players"
   ]
 }

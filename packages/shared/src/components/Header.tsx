@@ -1,12 +1,10 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { playersRoutes } from '@packages/shared/src/routes/players';
 import { playerRoutes } from '@packages/shared/src/routes/player';
 import { clubsRoutes } from '@packages/shared/src/routes/clubs';
-import { Button, Container, Form, Nav, Navbar, NavDropdown, Offcanvas, Row, Col } from 'react-bootstrap';
+import { Button, Container, Form, Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
 
-import './App.scss';
-
-export const App = () => {
+export const Header = () => {
     return (
         <>
             <header>
@@ -46,38 +44,6 @@ export const App = () => {
                     </Container>
                 </Navbar>
             </header>
-
-            <main>
-                <Container className="mt-4">
-                    <Outlet />
-                </Container>
-            </main>
-
-            <footer className="bg-dark text-white text-center py-4 mt-5">
-                <Container>
-                    <Row>
-                        <Col md={4}>
-                            <h5>Football App</h5>
-                            <p>&copy; {new Date().getFullYear()} Football App, All rights reserved.</p>
-                        </Col>
-                        <Col md={4}>
-                            <h5>Quick Links</h5>
-                            <ul className="list-unstyled">
-                                <li><Link to={playersRoutes.main} className="text-white">Players</Link></li>
-                                <li><Link to={clubsRoutes.main} className="text-white">Clubs</Link></li>
-                            </ul>
-                        </Col>
-                        <Col md={4}>
-                            <h5>Follow Us</h5>
-                            <ul className="list-unstyled">
-                                <li><a href="#" className="text-white">Twitter</a></li>
-                                <li><a href="#" className="text-white">Facebook</a></li>
-                                <li><a href="#" className="text-white">Instagram</a></li>
-                            </ul>
-                        </Col>
-                    </Row>
-                </Container>
-            </footer>
         </>
     );
 };

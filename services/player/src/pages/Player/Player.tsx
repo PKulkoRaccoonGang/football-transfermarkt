@@ -1,4 +1,3 @@
-import React from 'react';
 import {playerRoutes} from '@packages/shared/src/routes/player';
 import {Link} from "react-router-dom";
 
