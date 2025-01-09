@@ -2,7 +2,6 @@ import {ModuleOptions} from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ReactRefreshTypeScript from "react-refresh-typescript";
 import {BuildOptions} from "./types/types";
-// import {buildBabelLoader} from "./babel/buildBabelLoader";
 
 export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     const isDev = options.mode === 'development';
@@ -45,15 +44,31 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
 
     const scssLoader = {
         test: /\.s[ac]ss$/i,
-        use: [
-            // Creates `style` nodes from JS strings
-            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-            // Translates CSS into CommonJS
-            cssLoaderWithModules,
-            // Compiles Sass to CSS
-            "sass-loader",
+        oneOf: [
+            {
+                test: /\.module\.s[ac]ss$/i,
+                use: [
+                    isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: {
+                                localIdentName: isDev ? '[local]' : '[hash:base64:8]',
+                            },
+                        },
+                    },
+                    "sass-loader",
+                ],
+            },
+            {
+                use: [
+                    isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    "sass-loader",
+                ],
+            },
         ],
-    }
+    };
 
 
 
@@ -73,14 +88,11 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
         ]
     }
 
-    // const babelLoader = buildBabelLoader(options);
-
 
     return [
         assetLoader,
         scssLoader,
         tsLoader,
-        // babelLoader,
         svgrLoader
     ]
 }

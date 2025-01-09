@@ -1,7 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
-
-import {BuildMode, BuildPaths, BuildPlatform, buildWebpack} from '@packages/build-config'
+import {BuildMode, BuildPaths, BuildPlatform, buildWebpack, BuildOptions} from '@packages/build-config'
 import packageJson from './package.json'
 
 interface EnvVariables {
@@ -9,8 +8,6 @@ interface EnvVariables {
     analyzer?: boolean;
     port?: number;
     platform?: BuildPlatform;
-    PLAYER_REMOTE_URL?: string;
-    CLUBS_REMOTE_URL?: string;
 }
 
 export default (env: EnvVariables) => {
@@ -21,11 +18,9 @@ export default (env: EnvVariables) => {
         public: path.resolve(__dirname, 'public'),
         src: path.resolve(__dirname, 'src'),
     }
-    const PLAYER_REMOTE_URL = env.PLAYER_REMOTE_URL ?? 'http://localhost:3001';
-    const CLUBS_REMOTE_URL = env.CLUBS_REMOTE_URL ?? 'http://localhost:3003';
 
     const config: webpack.Configuration = buildWebpack({
-        port: env.port ?? 3000,
+        port: env.port ?? 3001,
         mode: env.mode ?? 'development',
         paths,
         analyzer: env.analyzer,
@@ -33,23 +28,24 @@ export default (env: EnvVariables) => {
     })
 
     config.plugins.push(new webpack.container.ModuleFederationPlugin({
-        name: 'host',
+        name: 'player',
         filename: 'remoteEntry.js',
-
-        remotes: {
-            player: `player@${PLAYER_REMOTE_URL}/remoteEntry.js`,
-            clubs: `clubs@${CLUBS_REMOTE_URL}/remoteEntry.js`,
+        exposes: {
+            './Router': './src/Router.tsx',
         },
         shared: {
             ...packageJson.dependencies,
             react: {
                 eager: true,
+                requiredVersion: packageJson.dependencies['react'],
             },
             'react-router-dom': {
                 eager: true,
+                requiredVersion: packageJson.dependencies['react-router-dom'],
             },
             'react-dom': {
                 eager: true,
+                requiredVersion: packageJson.dependencies['react-dom'],
             },
         },
     }))
