@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
-import {BuildMode, BuildPaths, BuildPlatform, buildWebpack, BuildOptions} from '@packages/build-config'
+
+import {BuildMode, BuildPaths, BuildPlatform, buildWebpack} from '@packages/build-config'
 import packageJson from './package.json'
 
 interface EnvVariables {
@@ -9,7 +10,6 @@ interface EnvVariables {
     port?: number;
     platform?: BuildPlatform;
     PLAYER_REMOTE_URL?: string;
-    PLAYERS_REMOTE_URL?: string;
     CLUBS_REMOTE_URL?: string;
 }
 
@@ -22,7 +22,6 @@ export default (env: EnvVariables) => {
         src: path.resolve(__dirname, 'src'),
     }
     const PLAYER_REMOTE_URL = env.PLAYER_REMOTE_URL ?? 'http://localhost:3001';
-    const PLAYERS_REMOTE_URL = env.PLAYERS_REMOTE_URL ?? 'http://localhost:3002';
     const CLUBS_REMOTE_URL = env.CLUBS_REMOTE_URL ?? 'http://localhost:3003';
 
     const config: webpack.Configuration = buildWebpack({
@@ -39,22 +38,18 @@ export default (env: EnvVariables) => {
 
         remotes: {
             player: `player@${PLAYER_REMOTE_URL}/remoteEntry.js`,
-            players: `players@${PLAYERS_REMOTE_URL}/remoteEntry.js`,
             clubs: `clubs@${CLUBS_REMOTE_URL}/remoteEntry.js`,
         },
         shared: {
             ...packageJson.dependencies,
             react: {
                 eager: true,
-                // requiredVersion: packageJson.dependencies['react'],
             },
             'react-router-dom': {
                 eager: true,
-                // requiredVersion: packageJson.dependencies['react-router-dom'],
             },
             'react-dom': {
                 eager: true,
-                // requiredVersion: packageJson.dependencies['react-dom'],
             },
         },
     }))

@@ -31,7 +31,7 @@ export default (env: EnvVariables) => {
         name: 'player',
         filename: 'remoteEntry.js',
         exposes: {
-            './Router': './src/router/Router.tsx',
+            './Router': './src/Router.tsx',
         },
         shared: {
             ...packageJson.dependencies,

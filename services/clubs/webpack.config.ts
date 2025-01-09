@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
-import {BuildMode, BuildPaths, BuildPlatform, buildWebpack, BuildOptions} from '@packages/build-config'
+
+import {BuildMode, BuildPaths, BuildPlatform, buildWebpack} from '@packages/build-config'
 import packageJson from './package.json'
 
 interface EnvVariables {
@@ -31,7 +32,7 @@ export default (env: EnvVariables) => {
         name: 'clubs',
         filename: 'remoteEntry.js',
         exposes: {
-            './Router': './src/router/Router.tsx',
+            './Router': './src/Router.tsx',
         },
         shared: {
             ...packageJson.dependencies,

@@ -1,4 +1,4 @@
 export const clubsRoutes = {
-    main: '/clubs/main',
-    second: '/clubs/second',
+    main: '/clubs',
+    club: '/clubs/:id',
 }

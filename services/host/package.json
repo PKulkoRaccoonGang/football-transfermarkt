@@ -1,6 +1,14 @@
 {
   "name": "host",
   "version": "1.0.0",
+  "scripts": {
+    "start": "webpack serve --env mode=development",
+    "build:dev": "webpack --env mode=development",
+    "build:prod": "webpack --env mode=production",
+    "build:mobile": "webpack --env mode=production --env platform=mobile",
+    "build:desktop": "webpack --env mode=production --env platform=desktop",
+    "typecheck": "tsc"
+  },
   "dependencies": {
     "@packages/build-config": "*",
     "@packages/shared": "*",
@@ -9,14 +17,6 @@
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0"
-  },
-  "scripts": {
-    "start": "webpack serve --env mode=development",
-    "build:dev": "webpack --env mode=development",
-    "build:prod": "webpack --env mode=production",
-    "build:mobile": "webpack --env mode=production --env platform=mobile",
-    "build:desktop": "webpack --env mode=production --env platform=desktop",
-    "typecheck": "tsc"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
