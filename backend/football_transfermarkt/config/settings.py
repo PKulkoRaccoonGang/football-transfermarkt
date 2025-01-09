@@ -119,6 +119,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 SITE_NAME = "Football transfermarkt"
 
+# Jazzmin Admin Panel Customization
 JAZZMIN_SETTINGS = {
     "site_title": SITE_NAME,
     "site_header": SITE_NAME,

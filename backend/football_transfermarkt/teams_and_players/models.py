@@ -2,6 +2,11 @@ from django.db import models
 
 
 class Player(models.Model):
+    """
+    Represents a football player with their details, including personal information,
+    team affiliation, performance statistics, and photo.
+    """
+
     POSITION_CHOICES = [
         ("GK", "Goalkeeper"),
         ("DF", "Defender"),
@@ -47,6 +52,11 @@ class Player(models.Model):
 
 
 class Team(models.Model):
+    """
+    Represents a football team with its details, including name, city, country,
+    foundation year, stadium, coach, and team photo.
+    """
+
     name = models.CharField(max_length=100, unique=True, verbose_name="Team Name")
     city = models.CharField(max_length=100, verbose_name="City")
     country = models.CharField(max_length=100, verbose_name="Country")

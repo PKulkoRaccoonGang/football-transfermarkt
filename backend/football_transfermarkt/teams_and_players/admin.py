@@ -4,6 +4,11 @@ from .models import Player, Team
 
 
 class PlayerAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for the Player model. Customizes how players are displayed
+    and managed in the Django admin interface.
+    """
+
     list_display = (
         "first_name",
         "last_name",
@@ -21,6 +26,9 @@ class PlayerAdmin(admin.ModelAdmin):
     actions = ["make_inactive", "delete_photos"]
 
     def photo_preview(self, obj):
+        """
+        Displays a large preview of the player's photo in the admin interface.
+        """
         if obj.photo:
             return mark_safe(
                 f'<img src="{obj.photo.url}" style="max-height: 200px; max-width: 200px;" />'
@@ -30,6 +38,9 @@ class PlayerAdmin(admin.ModelAdmin):
     photo_preview.short_description = "Player Photo Preview"
 
     def team_photo_preview(self, obj):
+        """
+        Displays a large preview of the player's team's photo in the admin interface.
+        """
         if obj.team and obj.team.photo:
             return mark_safe(
                 f'<img src="{obj.team.photo.url}" style="max-height: 200px; max-width: 200px;" />'
@@ -39,6 +50,9 @@ class PlayerAdmin(admin.ModelAdmin):
     team_photo_preview.short_description = "Team Photo Preview"
 
     def get_photo_preview(self, obj):
+        """
+        Displays a small preview of the player's photo in the admin list view.
+        """
         if obj.photo:
             return mark_safe(
                 f'<img src="{obj.photo.url}" style="max-height: 50px; max-width: 50px;" />'
@@ -48,6 +62,9 @@ class PlayerAdmin(admin.ModelAdmin):
     get_photo_preview.short_description = "Player Preview"
 
     def assists_per_match(self, obj):
+        """
+        Calculates the average number of assists per match for the player.
+        """
         if obj.matches_played > 0:
             return round(obj.assists / obj.matches_played, 2)
         return 0
@@ -55,12 +72,18 @@ class PlayerAdmin(admin.ModelAdmin):
     assists_per_match.short_description = "Assists per Match"
 
     def make_inactive(self, request, queryset):
+        """
+        Marks selected players as inactive.
+        """
         updated = queryset.update(is_active=False)
         self.message_user(request, f"{updated} players were marked as inactive.")
 
     make_inactive.short_description = "Mark selected players as inactive"
 
     def delete_photos(self, request, queryset):
+        """
+        Deletes photos of selected players from storage.
+        """
         count = 0
         for player in queryset:
             if player.photo:
@@ -74,6 +97,11 @@ class PlayerAdmin(admin.ModelAdmin):
 
 
 class TeamAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for the Team model. Customizes how teams are displayed
+    and managed in the Django admin interface.
+    """
+
     list_display = (
         "name",
         "city",
@@ -90,6 +118,9 @@ class TeamAdmin(admin.ModelAdmin):
     actions = ["delete_photos"]
 
     def photo_preview(self, obj):
+        """
+        Displays a large preview of the team's photo in the admin interface.
+        """
         if obj.photo:
             return mark_safe(
                 f'<img src="{obj.photo.url}" style="max-height: 200px; max-width: 200px;" />'
@@ -99,6 +130,9 @@ class TeamAdmin(admin.ModelAdmin):
     photo_preview.short_description = "Photo Preview"
 
     def get_photo_preview(self, obj):
+        """
+        Displays a small preview of the team's photo in the admin list view.
+        """
         if obj.photo:
             return mark_safe(
                 f'<img src="{obj.photo.url}" style="max-height: 50px; max-width: 50px;" />'
@@ -108,11 +142,17 @@ class TeamAdmin(admin.ModelAdmin):
     get_photo_preview.short_description = "Preview"
 
     def players_count(self, obj):
+        """
+        Counts the number of players associated with the team.
+        """
         return obj.players.count()
 
     players_count.short_description = "Players Count"
 
     def players_list(self, obj):
+        """
+        Generates an HTML list of players associated with the team, including photos.
+        """
         players = obj.players.all()
         if not players.exists():
             return "No players in this team."
@@ -132,6 +172,9 @@ class TeamAdmin(admin.ModelAdmin):
     players_list.short_description = "Players"
 
     def delete_photos(self, request, queryset):
+        """
+        Deletes photos of selected teams from storage.
+        """
         count = 0
         for team in queryset:
             if team.photo:
