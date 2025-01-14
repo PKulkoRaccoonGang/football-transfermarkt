@@ -1,0 +1,52 @@
+@import "../../brand-theme";
+
+.no-scroll {
+  overflow: hidden;
+  height: 100%;
+}
+
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: map-get($z-index-map, loader);
+
+  .box {
+    margin: 0 auto;
+    width: 2.5rem;
+    height: 8.75rem;
+    position: relative;
+
+    .shadow {
+      position: absolute;
+      width: 100%;
+      height: 0.625rem;
+      background-color: grey;
+      bottom: 0;
+      border-radius: 100%;
+      transform: scaleX(0.8);
+      opacity: 0.6;
+      animation: shadowScale 1s linear infinite;
+    }
+  }
+
+  .gravity {
+    width: 2.5rem;
+    height: 2.5rem;
+    animation: bounce 1s cubic-bezier(0.68, 0.35, 0.29, 0.54) infinite;
+  }
+
+  .ball {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-image: url('https://cdn2.iconfinder.com/data/icons/activity-5/50/26BD-soccer-ball-128.png');
+    background-size: cover;
+    animation: roll 0.7s linear infinite;
+  }
+}

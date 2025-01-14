@@ -3,5 +3,8 @@
   "author": "petrokulko@gmail.com",
   "description": "Shared code for microfrontend services",
   "version": "1.0.0",
-  "main": "./src/index.ts"
+  "main": "./src/index.ts",
+  "dependencies": {
+    "react-router-dom": "^6.16.0"
+  }
 }

@@ -1,59 +1,58 @@
-import path from 'path';
+import path from 'node:path';
 import webpack from 'webpack';
 
-import {BuildMode, BuildPaths, BuildPlatform, buildWebpack} from '@packages/build-config'
-import packageJson from './package.json'
+import { type BuildMode, type BuildPaths, buildWebpack } from '@packages/build-config';
+import packageJson from './package.json';
 
 interface EnvVariables {
-    mode?: BuildMode;
-    analyzer?: boolean;
-    port?: number;
-    platform?: BuildPlatform;
-    PLAYER_REMOTE_URL?: string;
-    CLUBS_REMOTE_URL?: string;
+	mode?: BuildMode;
+	analyzer?: boolean;
+	port?: number;
+	PLAYER_REMOTE_URL?: string;
+	CLUBS_REMOTE_URL?: string;
 }
 
 export default (env: EnvVariables) => {
-    const paths: BuildPaths = {
-        output: path.resolve(__dirname, 'build'),
-        entry: path.resolve(__dirname, 'src', 'index.tsx'),
-        html: path.resolve(__dirname, 'public', 'index.html'),
-        public: path.resolve(__dirname, 'public'),
-        src: path.resolve(__dirname, 'src'),
-    }
-    const PLAYER_REMOTE_URL = env.PLAYER_REMOTE_URL ?? 'http://localhost:3001';
-    const CLUBS_REMOTE_URL = env.CLUBS_REMOTE_URL ?? 'http://localhost:3003';
+	const paths: BuildPaths = {
+		output: path.resolve(__dirname, 'build'),
+		entry: path.resolve(__dirname, 'src', 'index.tsx'),
+		html: path.resolve(__dirname, 'public', 'index.html'),
+		public: path.resolve(__dirname, 'public'),
+		src: path.resolve(__dirname, 'src'),
+	};
+	const PLAYER_REMOTE_URL = env.PLAYER_REMOTE_URL ?? 'http://localhost:3001';
+	const CLUBS_REMOTE_URL = env.CLUBS_REMOTE_URL ?? 'http://localhost:3002';
 
-    const config: webpack.Configuration = buildWebpack({
-        port: env.port ?? 3000,
-        mode: env.mode ?? 'development',
-        paths,
-        analyzer: env.analyzer,
-        platform: env.platform ?? 'desktop'
-    })
+	const config: webpack.Configuration = buildWebpack({
+		port: env.port ?? 3000,
+		mode: env.mode ?? 'development',
+		paths,
+		analyzer: env.analyzer,
+	});
 
-    config.plugins.push(new webpack.container.ModuleFederationPlugin({
-        name: 'host',
-        filename: 'remoteEntry.js',
+	config.plugins.push(
+		new webpack.container.ModuleFederationPlugin({
+			name: 'host',
+			filename: 'remoteEntry.js',
 
-        remotes: {
-            player: `player@${PLAYER_REMOTE_URL}/remoteEntry.js`,
-            clubs: `clubs@${CLUBS_REMOTE_URL}/remoteEntry.js`,
-        },
-        shared: {
-            ...packageJson.dependencies,
-            react: {
-                eager: true,
-            },
-            'react-router-dom': {
-                eager: true,
-            },
-            'react-dom': {
-                eager: true,
-            },
-        },
-    }))
+			remotes: {
+				player: `player@${PLAYER_REMOTE_URL}/remoteEntry.js`,
+				clubs: `clubs@${CLUBS_REMOTE_URL}/remoteEntry.js`,
+			},
+			shared: {
+				...packageJson.dependencies,
+				react: {
+					eager: true,
+				},
+				'react-router-dom': {
+					eager: true,
+				},
+				'react-dom': {
+					eager: true,
+				},
+			},
+		}),
+	);
 
-    return config;
-}
-
+	return config;
+};

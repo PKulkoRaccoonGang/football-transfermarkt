@@ -1,3 +1,3 @@
-import {lazy} from "react";
+import { lazy } from 'react';
 
-export const LazyClubs = lazy(() => import('./Clubs'))
+export const LazyClubs = lazy(() => import('./Clubs'));

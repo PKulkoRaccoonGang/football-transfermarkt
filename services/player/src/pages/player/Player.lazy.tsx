@@ -1,3 +1,3 @@
-import {lazy} from "react";
+import { lazy } from 'react';
 
-export const LazyPlayer = lazy(() => import('./Player'))
+export const LazyPlayer = lazy(() => import('./Player'));

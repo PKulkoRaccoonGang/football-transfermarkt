@@ -1,1 +1,1 @@
-export const placeholderImage = "https://via.placeholder.com/300";
+export const placeholderImage = 'https://via.placeholder.com/300';

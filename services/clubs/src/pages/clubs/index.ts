@@ -1,1 +1,1 @@
-export {LazyClubs as Clubs} from './LazyClubs.lazy';
+export { LazyClubs as Clubs } from './LazyClubs.lazy';

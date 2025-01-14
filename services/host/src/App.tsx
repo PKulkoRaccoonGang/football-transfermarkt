@@ -1,21 +1,21 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
-import { Header } from '@packages/shared/src/components/Header';
-import { Footer } from '@packages/shared/src/components/Footer';
+import { Header } from '@packages/shared/src/components/header';
+import { Footer } from '@packages/shared/src/components/footer';
 
 export const App = () => {
-    return (
-        <>
-            <Header />
+	return (
+		<>
+			<Header />
 
-            <main>
-                <Container className="mt-4">
-                    <Outlet />
-                </Container>
-            </main>
+			<main>
+				<Container className="mt-5 mb-5">
+					<Outlet />
+				</Container>
+			</main>
 
-            <Footer />
-        </>
-    );
+			<Footer />
+		</>
+	);
 };

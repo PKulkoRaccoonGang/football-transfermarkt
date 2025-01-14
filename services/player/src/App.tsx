@@ -1,15 +1,20 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
-import './assets/scss/Player.scss';
+import { MetaTags } from '@packages/shared/src/components/meta-tags';
+
+import './pages/index.scss';
 
 export const App = () => {
-    return (
-        <>
-            <h1 className="text-center my-4">Football player</h1>
-            <Container className="mt-5">
-                <Outlet />
-            </Container>
-        </>
-    );
+	return (
+		<>
+			<MetaTags
+				title="Player"
+				description="Explore more about football player."
+				keywords="football, player, soccer"
+				type="profile"
+			/>
+			<Outlet />
+		</>
+	);
 };
