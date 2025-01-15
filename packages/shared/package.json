@@ -3,5 +3,19 @@
   "author": "petrokulko@gmail.com",
   "description": "Shared code for microfrontend services",
   "version": "1.0.0",
-  "main": "./src/index.ts"
+  "main": "./src/index.ts",
+  "scripts": {
+    "lint-js": "biome lint .",
+    "lint-js:fix": "biome lint . --write",
+    "format-js": "biome format .",
+    "format-js:fix": "biome format --write .",
+    "lint-style": "stylelint src/**/*.scss",
+    "lint-style:fix": "stylelint \"src/**/*.scss\" --fix"
+  },
+  "dependencies": {
+    "@biomejs/biome": "1.9.4",
+    "react-router-dom": "^6.16.0",
+    "stylelint": "^15.11.0",
+    "@edx/stylelint-config-edx": "^2.3.3"
+  }
 }
