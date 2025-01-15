@@ -1,5 +1,5 @@
 {
-  "name": "Player",
+  "name": "player",
   "version": "1.0.0",
   "dependencies": {
     "@packages/build-config": "*",

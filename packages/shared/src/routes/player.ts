@@ -1,3 +1,3 @@
 export const playerRoutes = {
-    main: '/player',
-}
+	main: '/player',
+};

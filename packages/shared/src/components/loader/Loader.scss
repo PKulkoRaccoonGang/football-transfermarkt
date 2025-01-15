@@ -32,7 +32,7 @@
       border-radius: 100%;
       transform: scaleX(0.8);
       opacity: 0.6;
-      animation: shadowScale 1s linear infinite;
+      animation: shadow-scale 1s linear infinite;
     }
   }
 
@@ -45,7 +45,7 @@
   .ball {
     width: 2.5rem;
     height: 2.5rem;
-    background-image: url('https://cdn2.iconfinder.com/data/icons/activity-5/50/26BD-soccer-ball-128.png');
+    background-image: url("https://cdn2.iconfinder.com/data/icons/activity-5/50/26BD-soccer-ball-128.png");
     background-size: cover;
     animation: roll 0.7s linear infinite;
   }

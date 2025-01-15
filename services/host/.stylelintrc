@@ -40,6 +40,7 @@
     "scss/at-extend-no-missing-placeholder": null,
     "scss/no-global-function-names": null,
     "no-descending-specificity": null,
-    "import-notation": null
+    "import-notation": null,
+    "no-missing-end-of-source-newline": true
   }
 }
