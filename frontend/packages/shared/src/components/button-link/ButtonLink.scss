@@ -34,7 +34,7 @@
   }
 
   &:hover {
-    background: lighten($primary, 5%);
+    background: $primary;
     transform: scale(1.05);
 
     .ball-icon {

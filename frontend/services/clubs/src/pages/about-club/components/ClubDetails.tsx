@@ -3,9 +3,9 @@ import { ButtonLink } from '@packages/shared/src/components/button-link';
 type Club = {
 	name: string;
 	description: string;
-	founded: number;
+	foundationYear: number;
 	stadium: string;
-	headCoach: string;
+	coach: string;
 };
 
 type ClubDetailsProps = {
@@ -15,10 +15,16 @@ type ClubDetailsProps = {
 const ClubDetails: React.FC<ClubDetailsProps> = ({ club }) => {
 	return (
 		<div className="details-container">
-			<h1 className="club-name">{club.name}</h1>
-			<p className="club-description">{club.description}</p>
+			<h1 className="club-name">FC {club.name}</h1>
+			<p className="club-description">{club?.description}</p>
 			<p>
-				<strong>Founded:</strong> {club.founded}
+				<strong>Founded:</strong> {club.foundationYear}
+			</p>
+			<p>
+				<strong>Country:</strong> {club.country}
+			</p>
+			<p>
+				<strong>City:</strong> {club.city}
 			</p>
 			<p>
 				<strong>Stadium:</strong>{' '}
@@ -34,12 +40,12 @@ const ClubDetails: React.FC<ClubDetailsProps> = ({ club }) => {
 			<p>
 				<strong>Head Coach:</strong>{' '}
 				<a
-					href={`https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(club.headCoach)}`}
+					href={`https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(club.coach)}`}
 					target="_blank"
 					rel="noopener noreferrer"
 					className="coach-link"
 				>
-					{club.headCoach}
+					{club.coach}
 				</a>
 			</p>
 			<ButtonLink title="Back to Clubs" path="/clubs" />
