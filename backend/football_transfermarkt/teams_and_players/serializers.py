@@ -37,4 +37,6 @@ class TeamSerializer(serializers.ModelSerializer):
             "coach",
             "players",
             "photo",
+            "description",
+            "primary_color",
         ]

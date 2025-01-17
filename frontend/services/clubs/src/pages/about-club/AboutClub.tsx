@@ -1,16 +1,34 @@
+import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Row, Col, Alert } from 'react-bootstrap';
 
+import { Loader } from '@packages/shared/src/components/loader';
+import { useTeam } from '../../../data/hooks/useTeam';
 import { placeholderImage } from '../constants';
 import ClubImage from './components/ClubImage';
 import ClubDetails from './components/ClubDetails';
 import ClubPlayers from './components/ClubPlayers';
-import clubs from './__mocks__/club';
 
 const AboutClub = () => {
 	const { id } = useParams();
 	const clubId = Number.parseInt(id, 10);
-	const club = clubs.find((club) => club.id === clubId);
+  const { data: club, isLoading, isError } = useTeam(clubId);
+
+	useEffect(() => {
+    document.documentElement.style.setProperty("--primary", club?.primaryColor);
+
+    return () => {
+      document.documentElement.style.setProperty("--primary", "#ff7e5f");
+    };
+  }, [club]);
+
+	if (isLoading) {
+		return <Loader />;
+	}
+
+	if (isError) {
+		return <div>Failed to fetch club</div>;
+	}
 
 	if (!club) {
 		return (
@@ -33,7 +51,7 @@ const AboutClub = () => {
 		<div className="about-club-container">
 			<Row className="align-items-center">
 				<Col md={6}>
-					<ClubImage imageSrc={club.image} clubName={club.name} onError={handleImageError} />
+					<ClubImage imageSrc={club.photo} clubName={club.name} onError={handleImageError} />
 				</Col>
 				<Col md={6}>
 					<ClubDetails club={club} />

@@ -1,5 +1,9 @@
+:root {
+  --primary: #ff7e5f;
+}
+
 $white: #fff;
-$primary: #ff7e5f;
+$primary: var(--primary);
 $font-weight-bold: 700;
 $black: #000;
 $success: #28a745;
