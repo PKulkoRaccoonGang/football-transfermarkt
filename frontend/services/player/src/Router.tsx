@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { App } from './App';
 import { Player } from '@/pages/player';
-import { Loader } from '@packages/shared/src/components/loader';
+import { Loader } from '@packages/shared/ui-kit';
 
 const routes = [
 	{
@@ -11,7 +11,7 @@ const routes = [
 		element: <App />,
 		children: [
 			{
-				path: '/player',
+				path: '/player:id',
 				element: (
 					<Suspense fallback={<Loader />}>
 						<Player />

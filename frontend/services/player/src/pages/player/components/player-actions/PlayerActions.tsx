@@ -1,13 +1,31 @@
+import type { FC } from 'react';
 import type { PlayerActionsProps } from './types';
 
-import { ButtonLink } from '@packages/shared/src/components/button-link';
+import { ButtonLink } from '@packages/shared/ui-kit';
+import { Stack } from 'react-bootstrap';
 
-const PlayerActions: React.FC<PlayerActionsProps> = ({ handleBuyPlayer, handleSellPlayer }) => {
+const PlayerActions: FC<PlayerActionsProps> = ({ handleBuyPlayer, handleSellPlayer }) => {
 	return (
-		<>
-			<ButtonLink className="mb-3" title="Buy a player" variant="success" type="button" onClick={handleBuyPlayer} />
-			<ButtonLink title="Sell a player" variant="danger" type="button" onClick={handleSellPlayer} />
-		</>
+		<Stack gap={3} direction="vertical" className="player-actions">
+			<ButtonLink
+				className="player-action-button"
+				variant="success"
+				type="button"
+				onClick={handleBuyPlayer}
+				aria-label="Buy a player"
+			>
+				Buy a player
+			</ButtonLink>
+			<ButtonLink
+				className="player-action-button"
+				variant="danger"
+				type="button"
+				onClick={handleSellPlayer}
+				aria-label="Sell a player"
+			>
+				Sell a player
+			</ButtonLink>
+		</Stack>
 	);
 };
 

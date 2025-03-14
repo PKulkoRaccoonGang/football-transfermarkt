@@ -1,10 +1,11 @@
 import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
-import { App } from './App';
 import { Clubs } from '@/pages/clubs';
 import { AboutClub } from '@/pages/about-club';
-import { Loader } from '@packages/shared/src/components/loader';
+import { Loader } from '@packages/shared/ui-kit';
+
+import { App } from './App';
 
 const routes = [
 	{

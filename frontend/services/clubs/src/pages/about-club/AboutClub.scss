@@ -10,7 +10,7 @@
     font-family: Poppins, sans-serif;
     font-size: 2.5rem;
     font-weight: $font-weight-bold;
-    color: $primary;
+    color: var(--primary);
     margin-bottom: 0.938rem;
   }
 
@@ -38,7 +38,7 @@
   .stadium-link,
   .coach-link,
   .player-link {
-    color: $primary;
+    color: var(--primary);
     text-decoration: none;
     font-weight: $font-weight-bold;
 
@@ -54,12 +54,12 @@
       font-size: 2rem;
       font-weight: $font-weight-bold;
       margin-bottom: 1.25rem;
-      color: $primary;
+      color: var(--primary);
     }
   }
 
   .players-table th {
-    color: $primary;
+    color: var(--primary);
   }
 
   .players-table img.player-photo {

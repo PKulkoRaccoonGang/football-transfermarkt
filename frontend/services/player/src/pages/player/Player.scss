@@ -20,7 +20,7 @@
     width: 15.625rem;
     height: 15.625rem;
     border-radius: 50%;
-    border: 0.313rem solid $primary;
+    border: 0.313rem solid var(--primary);
     padding: 0.313rem;
     box-shadow: 0 0.25rem 0.938rem rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -36,7 +36,7 @@
     font-family: Poppins, sans-serif;
     font-size: 2.5rem;
     font-weight: $font-weight-bold;
-    color: $primary;
+    color: var(--primary);
     margin-bottom: 0.938rem;
   }
 
@@ -47,12 +47,13 @@
     margin-top: 0.938rem;
   }
 
-  .stats-title {
+  .stats-title,
+  .player-highlights-title {
     font-family: Poppins, sans-serif;
     font-size: 1.8rem;
     font-weight: $font-weight-bold;
     margin-bottom: 1.25rem;
-    color: $primary;
+    color: var(--primary);
     text-align: center;
   }
 
@@ -75,7 +76,7 @@
       color: #333;
 
       strong {
-        color: $primary;
+        color: var(--primary);
       }
 
       &:hover {
@@ -85,7 +86,7 @@
   }
 
   .team-link {
-    color: $primary;
+    color: var(--primary);
     text-decoration: none;
     font-weight: $font-weight-bold;
 
@@ -104,5 +105,67 @@
       transform: scale(1.1);
       box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.2);
     }
+  }
+}
+
+.player-highlights {
+  max-width: 50rem;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border-radius: 0.625rem;
+  text-align: center;
+
+  .player-highlights-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  .loading {
+    font-size: 1.2rem;
+    color: #555;
+  }
+
+  .video-container {
+    position: relative;
+    padding-top: 56.25%;
+    overflow: hidden;
+    border-radius: 0.625rem;
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  }
+}
+
+.flag {
+  width: 1.5rem;
+  height: auto;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  border-radius: 0.25rem;
+}
+
+.player-stats-charts {
+  width: 100%;
+  padding: 1.25rem;
+
+  .percentage-statistics-chart-container {
+    height: 18.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .integer-statistics-chart-container {
+    height: 25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .cards-statistics-chart-container {
+    height: 18.75rem;
   }
 }

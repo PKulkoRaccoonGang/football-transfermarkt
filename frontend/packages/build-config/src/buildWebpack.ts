@@ -21,6 +21,14 @@ export function buildWebpack(options: BuildOptions): webpack.Configuration {
 		module: {
 			rules: buildLoaders(options),
 		},
+		ignoreWarnings: [
+			{
+				module: /sass-loader/,
+			},
+			{
+				message: /The legacy JS API is deprecated/,
+			},
+		],
 		resolve: buildResolvers(options),
 		devtool: isDev ? 'eval-cheap-module-source-map' : 'source-map',
 		devServer: isDev ? buildDevServer(options) : undefined,

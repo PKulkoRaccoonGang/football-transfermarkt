@@ -1,8 +1,8 @@
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 import type { PlayerModalProps } from './types';
 
-import { ButtonLink } from '@packages/shared/src/components/button-link';
+import { ButtonLink } from '@packages/shared/ui-kit';
 
 const PlayerModal: React.FC<PlayerModalProps> = ({
 	showModal,
@@ -19,22 +19,22 @@ const PlayerModal: React.FC<PlayerModalProps> = ({
 			<Modal.Body>
 				{modalType === 'buy' ? (
 					<>
-						Are you sure you want to <strong>buy</strong> {player.name} for {player.price}?
+						Are you sure you want to <strong>buy</strong> {player.firstName} {player.lastName} for{' '}
+						<strong>{player.marketValue}</strong>?
 					</>
 				) : (
 					<>
-						Are you sure you want to <strong>sell</strong> {player.name}?
+						Are you sure you want to <strong>sell</strong> {player.firstName} {player.lastName}?
 					</>
 				)}
 			</Modal.Body>
 			<Modal.Footer>
-				<ButtonLink title="Cancel" variant="danger" type="button" onClick={handleCloseModal} />
-				<ButtonLink
-					title={modalType === 'buy' ? 'Confirm Purchase' : 'Confirm Sale'}
-					variant={modalType === 'buy' ? 'success' : 'danger'}
-					type="button"
-					onClick={handleConfirmAction}
-				/>
+				<ButtonLink variant="danger" type="button" onClick={handleCloseModal}>
+					Cancel
+				</ButtonLink>
+				<ButtonLink variant={modalType === 'buy' ? 'success' : 'danger'} type="button" onClick={handleConfirmAction}>
+					{modalType === 'buy' ? 'Confirm Purchase' : 'Confirm Sale'}
+				</ButtonLink>
 			</Modal.Footer>
 		</Modal>
 	);

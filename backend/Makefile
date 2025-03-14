@@ -1,29 +1,13 @@
-PYTHON = python
-PIP = pip
-MANAGE = $(PYTHON) football_transfermarkt/manage.py
+DOCKER_COMPOSE = docker-compose
+CONTAINER_NAME = football_transfermarkt_backend
 
-VENV_DIR = env
-ACTIVATE = source $(VENV_DIR)/bin/activate
-
-.PHONY: help install venv runserver migrations migrate ruff ruff-fix test clean
-
-venv:
-	$(PYTHON) -m venv $(VENV_DIR)
-
-install: venv
-	$(ACTIVATE) && $(PIP) install -r requirements.txt
-
-runserver:
-	$(MANAGE) runserver
-
-migrations:
-	$(MANAGE) makemigrations
-
-migrate:
-	$(MANAGE) migrate
+.PHONY: ruff ruff-fix test clean docker-start docker-build docker-shell docker-migrate docker-makemigrations
 
 ruff:
-	ruff format .
+	ruff .
+
+ruff-fix:
+	ruff --fix .
 
 test:
 	$(PYTHON) -m pytest
@@ -32,3 +16,18 @@ clean:
 	find . -name "__pycache__" -type d -exec rm -rf {} +
 	find . -name "*.pyc" -type f -delete
 	find . -name "*.pyo" -type f -delete
+
+docker-start:
+	$(DOCKER_COMPOSE) up --build
+
+docker-build:
+	$(DOCKER_COMPOSE) up -d --build
+
+docker-shell:
+	docker exec -it $(CONTAINER_NAME) bash
+
+docker-migrate:
+	docker exec -it $(CONTAINER_NAME) python manage.py migrate
+
+docker-makemigrations:
+	docker exec -it $(CONTAINER_NAME) python manage.py makemigrations

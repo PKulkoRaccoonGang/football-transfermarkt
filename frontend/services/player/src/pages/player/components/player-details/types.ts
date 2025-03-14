@@ -1,14 +1,4 @@
-export type Player = {
-	name: string;
-	position: string;
-	team: string;
-	wikipediaLink: string;
-	age: number;
-	nationality: string;
-	flagCode: string;
-	price: string | number;
-	description: string;
-};
+import type { Player } from '@/types';
 
 export type PlayerDetailsProps = {
 	playerData: Player;

@@ -3,7 +3,7 @@
   overflow: hidden;
   background: $white;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid $primary;
+  border: 2px solid var(--primary);
   padding: 0.313rem;
 
   .image-container {
@@ -46,7 +46,7 @@
   .club-title {
     font-size: 1.5rem;
     font-weight: $font-weight-bold;
-    color: $primary;
+    color: var(--primary);
     margin-bottom: 0.625rem;
     text-align: center;
   }

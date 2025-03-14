@@ -1,14 +1,4 @@
-export type Player = {
-	name: string;
-	position: string;
-	team: string;
-	age: number;
-	nationality: string;
-	flagCode: string;
-	price: string;
-	wikipediaLink: string;
-	image: string;
-};
+import type { Player } from '@/types';
 
 export type PlayerModalProps = {
 	showModal: boolean;

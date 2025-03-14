@@ -1,13 +1,16 @@
 import { Row, Col, Card, Badge, Stack } from 'react-bootstrap';
 
-import { placeholderImage } from '../constants';
-import { useTeams } from '../../../data/hooks/useTeams';
+import { ButtonLink, Loader, AlertMessage } from '@packages/shared/ui-kit';
+import type { Team } from '@/types';
 
-import { ButtonLink } from '@packages/shared/src/components/button-link';
-import { Loader } from '@packages/shared/src/components/loader';
+import { useTeams } from '../../data/hooks/useTeams';
+import { placeholderImage } from '../constants';
 
 const Clubs = () => {
-	const { data: teams, isLoading, isError } = useTeams();
+	const { data, isLoading, isError } = useTeams();
+
+	const teamData: Team[] = Array.isArray(data) ? data : [];
+
 	const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
 		event.currentTarget.src = placeholderImage;
 	};
@@ -17,36 +20,37 @@ const Clubs = () => {
 	}
 
 	if (isError) {
-		return <div>Failed to fetch clubs</div>;
+		return <AlertMessage title="🚫 Ooops... Something happened..." variant="danger" />;
 	}
+
 	return (
 		<div className="clubs-container">
 			<Row>
-				{teams.map((club) => (
-					<Col md={4} sm={6} xs={12} key={club.id} className="mb-4">
+				{teamData.map((team) => (
+					<Col md={4} sm={6} xs={12} key={team.id} className="mb-4">
 						<Card className="club-card h-100 shadow-lg">
 							<div className="image-container">
 								<Card.Img
 									variant="top"
-									src={club.photo || placeholderImage}
+									src={team.photo || placeholderImage}
 									onError={handleImageError}
-									alt={club.name}
+									alt={team.name}
 									className="club-image"
 								/>
 							</div>
 							<Card.Body className="d-flex flex-column">
-								<Card.Title className="club-title">FC {club.name}</Card.Title>
-								<Card.Text className="club-description">
-								<Stack direction="horizontal" gap={3} className="justify-content-center">
-									<Badge className="px-3 py-2">
-										Country: {club.country}
+								<Card.Title className="club-title">FC {team.name}</Card.Title>
+								<Stack direction="horizontal" gap={3} className="justify-content-center mb-3">
+									<Badge className="club-description-badge px-3 py-2" pill>
+										Country: {team.country}
 									</Badge>
-									<Badge className="px-3 py-2">
-										Coach: {club.coach}
+									<Badge className="club-description-badge px-3 py-2" pill>
+										Coach: {team.coach}
 									</Badge>
 								</Stack>
-							</Card.Text>
-								<ButtonLink title="View Club" path={`/clubs/${club.id}`} />
+								<ButtonLink path={`/clubs/${team.id}`} className="mt-auto">
+									View Club
+								</ButtonLink>
 							</Card.Body>
 						</Card>
 					</Col>

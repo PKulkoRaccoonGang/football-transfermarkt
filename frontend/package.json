@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "npm run start:all",
-    "start:all": "npm run start -w services/clubs & npm run start -w services/host & npm run start -w services/player"
+    "start:all": "npm run start -w services/clubs & npm run start -w services/host & npm run start -w services/player &  npm run start -w services/authn"
   },
   "workspaces": [
     "packages/*",

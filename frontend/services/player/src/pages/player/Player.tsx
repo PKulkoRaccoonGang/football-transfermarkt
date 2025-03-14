@@ -1,23 +1,43 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Image, Row, Col, Alert } from 'react-bootstrap';
 
-import { PlayerModal, PlayerStats, PlayerDetails, PlayerActions } from './components';
-import player from './__mocks__/player';
+import { Loader, AlertMessage } from '@packages/shared/ui-kit';
+import { usePlayer } from '../../data/hooks/usePlayer';
+import { PlayerModal, PlayerDetails, PlayerActions, PlayerHighlights, PlayerStatsChart } from './components';
 import { useConfetti } from './hooks';
+import type { Player as PlayerTypes } from '../../types';
 
 const Player = () => {
+	const { id } = useParams();
+	const playerId = Number.isNaN(Number(id)) ? null : Number.parseInt(id, 10);
+	const { data, isLoading, isError } = usePlayer(playerId);
+
+	const playerDetails = data && typeof data === 'object' ? (data as PlayerTypes) : null;
+
 	const [showModal, setShowModal] = useState(false);
 	const [modalType, setModalType] = useState<'buy' | 'sell' | null>(null);
 	const [notification, setNotification] = useState<string | null>(null);
 	const { canvasRef, triggerConfetti } = useConfetti();
 
-	const handleBuyPlayer = () => {
-		setModalType('buy');
-		setShowModal(true);
-	};
+	if (isLoading) {
+		return <Loader />;
+	}
 
-	const handleSellPlayer = () => {
-		setModalType('sell');
+	if (isError || !playerDetails) {
+		return (
+			<AlertMessage
+				title="🚫 Player not found."
+				linkTitle="Back to Teams"
+				hasLink
+				variant="danger"
+				destination="/clubs"
+			/>
+		);
+	}
+
+	const handleAction = (type: 'buy' | 'sell') => {
+		setModalType(type);
 		setShowModal(true);
 	};
 
@@ -29,9 +49,9 @@ const Player = () => {
 	const handleConfirmAction = () => {
 		if (modalType === 'buy') {
 			triggerConfetti();
-			setNotification(`${player.name} purchased successfully for ${player.price}!`);
+			setNotification(`${playerDetails.firstName} ${playerDetails.lastName} purchased successfully!`);
 		} else if (modalType === 'sell') {
-			setNotification(`${player.name} sold successfully!`);
+			setNotification(`${playerDetails.firstName} ${playerDetails.lastName} sold successfully!`);
 		}
 		setTimeout(() => setNotification(null), 5000);
 		setShowModal(false);
@@ -49,20 +69,32 @@ const Player = () => {
 			<div className="player-container">
 				<Row className="align-items-center">
 					<Col md={4} className="text-center">
-						<Image src={player.image} alt={player.name} fluid className="player-image" />
+						<Image
+							src={playerDetails.photo ?? ''}
+							alt={`${playerDetails.firstName ?? ''} ${playerDetails.lastName ?? ''}`}
+							fluid
+							className="player-image"
+						/>
 					</Col>
 					<Col md={8}>
-						<PlayerDetails playerData={player} />
+						<PlayerDetails playerData={playerDetails} />
 					</Col>
 				</Row>
 				<Row className="mt-5">
 					<Col>
-						<PlayerStats />
+						<PlayerStatsChart stats={playerDetails} />
 					</Col>
 				</Row>
+
+				<Row className="mt-5">
+					<Col>
+						<PlayerHighlights playerName={`${playerDetails.firstName ?? ''} ${playerDetails.lastName ?? ''}`} />
+					</Col>
+				</Row>
+
 				<Row className="mt-5">
 					<Col className="text-center">
-						<PlayerActions handleBuyPlayer={handleBuyPlayer} handleSellPlayer={handleSellPlayer} />
+						<PlayerActions handleBuyPlayer={() => handleAction('buy')} handleSellPlayer={() => handleAction('sell')} />
 					</Col>
 				</Row>
 
@@ -70,7 +102,7 @@ const Player = () => {
 					showModal={showModal}
 					handleCloseModal={handleCloseModal}
 					modalType={modalType}
-					player={player}
+					player={playerDetails}
 					handleConfirmAction={handleConfirmAction}
 				/>
 			</div>

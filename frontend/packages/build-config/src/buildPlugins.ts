@@ -5,6 +5,9 @@ import type { BuildOptions } from './types/types';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import path from 'node:path';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export function buildPlugins({ mode, paths, analyzer }: BuildOptions): Configuration['plugins'] {
 	const isDev = mode === 'development';
@@ -19,6 +22,9 @@ export function buildPlugins({ mode, paths, analyzer }: BuildOptions): Configura
 		new DefinePlugin({
 			__ENV__: JSON.stringify(mode),
 		}),
+		new DefinePlugin({
+      'process.env': JSON.stringify(process.env),
+    }),
 	];
 
 	if (isDev) {

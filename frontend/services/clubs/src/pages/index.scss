@@ -1,7 +1,7 @@
-@import "../../packages/shared/src/brand-theme";
+@import "../../packages/shared/ui-kit";
 @import "./about-club/AboutClub";
 @import "./clubs/Clubs";
 
 .page-title {
-  color: $primary;
+  color: var(--primary);
 }

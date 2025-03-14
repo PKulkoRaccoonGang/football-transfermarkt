@@ -5,6 +5,8 @@ import { App } from './App';
 import playerRoutes from 'player/Router';
 // @ts-ignore
 import clubsRoutes from 'clubs/Router';
+// @ts-ignore
+import authnRoutes from 'authn/Router';
 
 export const router = createBrowserRouter([
 	{
@@ -13,6 +15,7 @@ export const router = createBrowserRouter([
 		children: [
 			...playerRoutes,
 			...clubsRoutes,
+			...authnRoutes,
 		],
 	},
 ]);

@@ -1,4 +1,4 @@
-#!/Users/peterkulko/dev/test/football-transfermarkt/backend/myenv/bin/python3.12
+#!/Users/peterkulko/dev/football-transfermarkt/backend/myenv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

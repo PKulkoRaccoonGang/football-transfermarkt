@@ -1,45 +1,45 @@
 import { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { Row, Col, Alert } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
 
-import { Loader } from '@packages/shared/src/components/loader';
-import { useTeam } from '../../../data/hooks/useTeam';
+import { Loader, AlertMessage } from '@packages/shared/ui-kit';
+
+import { useTeams } from '../../data/hooks/useTeams';
+import { TeamImage, TeamDetails, TeamPlayers } from './components';
 import { placeholderImage } from '../constants';
-import ClubImage from './components/ClubImage';
-import ClubDetails from './components/ClubDetails';
-import ClubPlayers from './components/ClubPlayers';
+import type { Team } from '../../types';
+
+const BASE_PAGE_PRIMARY_COLOR = '#1d3557';
 
 const AboutClub = () => {
 	const { id } = useParams();
-	const clubId = Number.parseInt(id, 10);
-  const { data: club, isLoading, isError } = useTeam(clubId);
+	const teamId = Number.isNaN(Number(id)) ? null : Number.parseInt(id, 10);
+	const { data, isLoading, isError } = useTeams(teamId);
+
+	const teamData = data && typeof data === 'object' ? (data as Team) : null;
 
 	useEffect(() => {
-    document.documentElement.style.setProperty("--primary", club?.primaryColor);
+		const primaryColor = teamData?.primaryColor || BASE_PAGE_PRIMARY_COLOR;
+		document.documentElement.style.setProperty('--primary', primaryColor);
 
-    return () => {
-      document.documentElement.style.setProperty("--primary", "#ff7e5f");
-    };
-  }, [club]);
+		return () => {
+			document.documentElement.style.setProperty('--primary', BASE_PAGE_PRIMARY_COLOR);
+		};
+	}, [teamData?.primaryColor]);
 
 	if (isLoading) {
 		return <Loader />;
 	}
 
-	if (isError) {
-		return <div>Failed to fetch club</div>;
-	}
-
-	if (!club) {
+	if (isError || !teamData) {
 		return (
-			<div className="container text-center not-found-container">
-				<Alert variant="danger" className="text-center">
-					🚫 Club not found.
-				</Alert>
-				<Link className="mt-auto custom-button" to="/clubs">
-					⬅ Back to Clubs
-				</Link>
-			</div>
+			<AlertMessage
+				title="🚫 Team not found."
+				linkTitle="Back to Teams"
+				hasLink
+				variant="danger"
+				destination="/clubs"
+			/>
 		);
 	}
 
@@ -51,13 +51,17 @@ const AboutClub = () => {
 		<div className="about-club-container">
 			<Row className="align-items-center">
 				<Col md={6}>
-					<ClubImage imageSrc={club.photo} clubName={club.name} onError={handleImageError} />
+					<TeamImage imageSrc={teamData.photo} teamName={teamData.name} onError={handleImageError} />
 				</Col>
 				<Col md={6}>
-					<ClubDetails club={club} />
+					<TeamDetails team={teamData} />
 				</Col>
 			</Row>
-			<ClubPlayers clubId={clubId} club={club} onError={handleImageError} />
+			{teamData.players?.length ? (
+				<TeamPlayers team={teamData} onError={handleImageError} />
+			) : (
+				<AlertMessage title="🚫 No players found." variant="warning" />
+			)}
 		</div>
 	);
 };

@@ -10,6 +10,7 @@ interface EnvVariables {
 	port?: number;
 	PLAYER_REMOTE_URL?: string;
 	CLUBS_REMOTE_URL?: string;
+	AUTHN_REMOTE_URL?: string;
 }
 
 export default (env: EnvVariables) => {
@@ -22,6 +23,7 @@ export default (env: EnvVariables) => {
 	};
 	const PLAYER_REMOTE_URL = env.PLAYER_REMOTE_URL ?? 'http://localhost:3001';
 	const CLUBS_REMOTE_URL = env.CLUBS_REMOTE_URL ?? 'http://localhost:3002';
+	const AUTHN_REMOTE_URL = env.AUTHN_REMOTE_URL ?? 'http://localhost:3003';
 
 	const config: webpack.Configuration = buildWebpack({
 		port: env.port ?? 3000,
@@ -38,6 +40,7 @@ export default (env: EnvVariables) => {
 			remotes: {
 				player: `player@${PLAYER_REMOTE_URL}/remoteEntry.js`,
 				clubs: `clubs@${CLUBS_REMOTE_URL}/remoteEntry.js`,
+				authn: `authn@${AUTHN_REMOTE_URL}/remoteEntry.js`,
 			},
 			shared: {
 				...packageJson.dependencies,

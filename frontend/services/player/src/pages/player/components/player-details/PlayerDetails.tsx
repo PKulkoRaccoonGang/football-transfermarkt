@@ -1,35 +1,55 @@
+import type { FC } from 'react';
 import type { PlayerDetailsProps } from './types';
+import { calculateAge } from './utils';
+import { useMemo } from 'react';
 
-const PlayerDetails: React.FC<PlayerDetailsProps> = ({ playerData }) => {
+const PlayerDetails: FC<PlayerDetailsProps> = ({ playerData }) => {
+	const formattedMarketValue = useMemo(
+		() =>
+			new Intl.NumberFormat('en-US', {
+				style: 'currency',
+				currency: 'USD',
+			}).format(playerData.marketValue ?? 0),
+		[playerData.marketValue],
+	);
+
+	const flagUrl = useMemo(
+		() => `https://flagcdn.com/w40/${playerData.countryCode.toLowerCase()}.webp`,
+		[playerData.countryCode],
+	);
+
 	return (
-		<>
-			<h2 className="player-name">{playerData.name}</h2>
+		<div className="player-details">
+			<h2 className="player-name">
+				{playerData.firstName} {playerData.lastName}
+			</h2>
 			<p>
 				<strong>Position:</strong> {playerData.position}
 			</p>
 			<p>
-				<strong>Team:</strong>{' '}
-				<a href={playerData.wikipediaLink} target="_blank" rel="noopener noreferrer" className="team-link">
-					{playerData.team}
-				</a>
+				<strong>Team:</strong> {playerData.team}
 			</p>
 			<p>
-				<strong>Age:</strong> {playerData.age}
+				<strong>Market Value (in USD):</strong> {formattedMarketValue}
 			</p>
 			<p>
-				<strong>Nationality:</strong>{' '}
+				<strong>Age:</strong> {calculateAge(playerData.birthDate)}
+			</p>
+			<p className="player-country">
+				<strong>Country:</strong>{' '}
 				<img
-					src={`https://flagcdn.com/w40/${playerData.flagCode}.png`}
-					alt={playerData.nationality}
-					className="player-flag"
+					src={flagUrl}
+					alt={`Flag of ${playerData.countryCode}`}
+					className="flag"
+					width={24}
+					height={16}
+					loading="lazy"
 				/>
-				{playerData.nationality}
 			</p>
 			<p>
-				<strong>Price:</strong> {playerData.price}
+				<strong>Jersey number:</strong> {playerData.jerseyNumber}
 			</p>
-			<p className="player-description">{playerData.description}</p>
-		</>
+		</div>
 	);
 };
 
