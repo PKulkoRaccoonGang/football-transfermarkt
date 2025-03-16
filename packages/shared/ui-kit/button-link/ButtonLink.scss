@@ -1,0 +1,54 @@
+@import "../index.scss";
+
+.button-link {
+  background-color: var(--primary);
+  border: none;
+  color: $white;
+  font-size: 1rem;
+  font-weight: $font-weight-bold;
+  padding: 0.625rem;
+  border-radius: 0.313rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+
+  &:disabled {
+    background-color: var(--primary);
+    cursor: not-allowed;
+  }
+
+  &.button-link--success {
+    background-color: $success;
+    width: 100%;
+
+    &:hover {
+      background-color: lighten($success, 5%);
+    }
+  }
+
+  &.button-link--danger {
+    background-color: $danger;
+    width: 100%;
+
+    &:hover {
+      background-color: lighten($danger, 5%);
+    }
+  }
+
+  &:hover {
+    background-color: var(--primary);
+    transform: scale(1.05);
+
+    .ball-icon {
+      transform: rotate(360deg);
+    }
+  }
+
+  .ball-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+}

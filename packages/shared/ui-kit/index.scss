@@ -1,0 +1,12 @@
+@import "./scss/variables";
+@import "./scss/animations";
+
+.app-layout {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.content {
+	flex-grow: 1;
+}
