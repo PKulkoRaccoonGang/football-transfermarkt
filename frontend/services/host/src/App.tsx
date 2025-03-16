@@ -7,7 +7,7 @@ export const App = () => {
 	return (
 		<div className="app-layout">
 			<Header />
-			<AIChat apiEndpoint="http://127.0.0.1:9000/api/v1/chat/" />
+			<AIChat apiEndpoint="http://127.0.0.1:9000/api/v1/ai_integrations/gemini/" />
 			<main className="content">
 				<Container className="mt-5 mb-5">
 					<Outlet />

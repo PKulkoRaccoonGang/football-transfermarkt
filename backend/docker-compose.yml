@@ -9,4 +9,4 @@ services:
     volumes:
       - .:/app
     environment:
-      DJANGO_SETTINGS_MODULE: config.settings
+      DJANGO_SETTINGS_MODULE: football_transfermarkt.settings

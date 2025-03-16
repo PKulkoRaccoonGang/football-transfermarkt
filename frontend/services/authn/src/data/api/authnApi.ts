@@ -4,9 +4,9 @@ import { convertToCamelCase } from "./utils";
 
 const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
 
-export const registerNewUser = async (data) => {
+export const registerNewUser = async (data: { userName: string; email: string; password: string; }) => {
   try {
-    const url = `${BASE_API_URL}register/`;
+    const url = `${BASE_API_URL}authn/register/`;
     const preparedData = {
       username: data.userName,
       email: data.email,
@@ -30,7 +30,7 @@ export const registerNewUser = async (data) => {
 
 export const fetchUserData = async () => {
   try {
-    const url = `${BASE_API_URL}user/`;
+    const url = `${BASE_API_URL}authn/user/`;
     const accessToken = localStorage.getItem("access_token");
 
     if (!accessToken) throw new Error("No access token found");
@@ -48,9 +48,9 @@ export const fetchUserData = async () => {
   }
 };
 
-export const loginUser = async (data) => {
+export const loginUser = async (data: { userName: string; password: string; }) => {
   try {
-    const url = `${BASE_API_URL}token/`;
+    const url = `${BASE_API_URL}authn/token/`;
     const preparedData = {
       username: data.userName,
       password: data.password,
@@ -72,7 +72,7 @@ export const loginUser = async (data) => {
   }
 };
 
-const handleApiError = (error) => {
+const handleApiError = (error: { response: { data: { detail: string; }; }; message: string; }) => {
   if (axios.isAxiosError(error)) {
     console.error("Axios Error:", error.response?.data || error.message);
     throw new Error(error.response?.data?.detail || "Something went wrong");

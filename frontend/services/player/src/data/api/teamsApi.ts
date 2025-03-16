@@ -14,7 +14,7 @@ const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
  */
 export const fetchPlayerDetails = async (id: number | null = null): Promise<Team | Team[]> => {
 	try {
-		const url = `${BASE_API_URL}player/${id}`;
+		const url = `${BASE_API_URL}players/${id}`;
 		const response = await axios.get<Team | Team[]>(url);
 		return convertToCamelCase(response.data);
 	} catch (error) {
