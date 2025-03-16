@@ -7,9 +7,6 @@ yarn-error.log
 dist/
 build/
 
-# Environment variables
-.env
-
 # IDE and editor files
 .vscode/
 .idea/
@@ -37,4 +34,3 @@ coverage/
 
 # Miscellaneous
 .DS_Store
-Thumbs.db
