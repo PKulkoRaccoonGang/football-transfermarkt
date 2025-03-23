@@ -20,11 +20,13 @@ RUN npm run build:prod
 FROM nginx:alpine
 ARG SERVICE
 COPY --from=builder /app/services/${SERVICE}/build /usr/share/nginx/html
+COPY nginx/includes /etc/nginx/includes
 COPY services/${SERVICE}/nginx.conf /etc/nginx/conf.d/default.conf
 
-RUN rm /etc/nginx/conf.d/default.conf
-COPY services/${SERVICE}/nginx.conf /etc/nginx/conf.d/
-RUN mkdir -p /var/cache/nginx
+RUN mkdir -p /var/cache/nginx /var/log/nginx && \
+    chmod -R 755 /var/cache/nginx
+
+RUN nginx -t
 
 HEALTHCHECK --interval=30s --timeout=3s \
     CMD wget -q --spider http://localhost:80 || exit 1
