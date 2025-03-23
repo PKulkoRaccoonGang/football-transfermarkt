@@ -1,0 +1,154 @@
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/includes:/etc/nginx/includes:ro
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - host
+      - player
+      - clubs
+      - authn
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  host:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE: host
+    ports:
+      - "3000:80"
+    environment:
+      - PLAYER_REMOTE_URL=http://player
+      - CLUBS_REMOTE_URL=http://clubs
+      - AUTHN_REMOTE_URL=http://authn
+      - NODE_ENV=production
+    depends_on:
+      - player
+      - clubs
+      - authn
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    expose:
+      - "80"
+
+  player:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE: player
+    ports:
+      - "3001:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    expose:
+      - "80"
+
+  clubs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE: clubs
+    ports:
+      - "3002:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    expose:
+      - "80"
+
+  authn:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE: authn
+    ports:
+      - "3003:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    expose:
+      - "80"
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  nginx-cache:
+    driver: local

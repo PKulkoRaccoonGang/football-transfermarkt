@@ -35,17 +35,52 @@ export default (env: EnvVariables) => {
 			shared: {
 				...packageJson.dependencies,
 				react: {
+					singleton: true,
 					eager: true,
 					requiredVersion: packageJson.dependencies.react,
 				},
 				'react-router-dom': {
+					singleton: true,
 					eager: true,
 					requiredVersion: packageJson.dependencies['react-router-dom'],
 				},
 				'react-dom': {
+					singleton: true,
 					eager: true,
 					requiredVersion: packageJson.dependencies['react-dom'],
 				},
+				'@tanstack/react-query': {
+					singleton: true,
+					requiredVersion: packageJson.dependencies['@tanstack/react-query'],
+				},
+				zustand: {
+					singleton: true,
+					requiredVersion: packageJson.dependencies.zustand,
+				},
+				'react-bootstrap': {
+					singleton: true,
+					requiredVersion: packageJson.dependencies['react-bootstrap'],
+				},
+				'react-helmet': {
+					singleton: true,
+					requiredVersion: packageJson.dependencies['react-helmet'],
+				},
+				'@packages/shared': {
+					singleton: true,
+					requiredVersion: packageJson.dependencies['@packages/shared'],
+				},
+				axios: {
+					singleton: true,
+					requiredVersion: packageJson.dependencies.axios,
+				},
+				'chart.js': {
+					singleton: true,
+					requiredVersion: packageJson.dependencies['chart.js'],
+				},
+				'react-chartjs-2': {
+					singleton: true,
+					requiredVersion: packageJson.dependencies['react-chartjs-2'],
+				}
 			},
 		}),
 	);
