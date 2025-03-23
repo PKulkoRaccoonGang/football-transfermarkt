@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  host:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE: host
+    ports:
+      - "3000:80"
+    environment:
+      - PLAYER_REMOTE_URL=http://player
+      - CLUBS_REMOTE_URL=http://clubs
+      - AUTHN_REMOTE_URL=http://authn
+    depends_on:
+      - player
+      - clubs
+      - authn
+
+  player:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE: player
+    ports:
+      - "3001:80"
+
+  clubs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE: clubs
+    ports:
+      - "3002:80"
+
+  authn:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE: authn
+    ports:
+      - "3003:80"
+
+networks:
+  default:
+    driver: bridge

@@ -5,7 +5,11 @@
   "version": "1.0.0",
   "scripts": {
     "start": "npm run start:all",
-    "start:all": "npm run start -w services/clubs & npm run start -w services/host & npm run start -w services/player &  npm run start -w services/authn"
+    "start:all": "npm run start -w services/clubs & npm run start -w services/host & npm run start -w services/player &  npm run start -w services/authn",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
   },
   "workspaces": [
     "packages/*",

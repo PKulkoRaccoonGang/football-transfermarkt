@@ -36,17 +36,28 @@ export default (env: EnvVariables) => {
 			shared: {
 				...packageJson.dependencies,
 				react: {
+					singleton: true,
 					eager: true,
 					requiredVersion: packageJson.dependencies.react,
 				},
 				'react-router-dom': {
+					singleton: true,
 					eager: true,
 					requiredVersion: packageJson.dependencies['react-router-dom'],
 				},
 				'react-dom': {
+					singleton: true,
 					eager: true,
 					requiredVersion: packageJson.dependencies['react-dom'],
 				},
+				'@tanstack/react-query': {
+					singleton: true,
+					requiredVersion: packageJson.dependencies['@tanstack/react-query'],
+				},
+				zustand: {
+					singleton: true,
+					requiredVersion: packageJson.dependencies.zustand,
+				}
 			},
 		}),
 	);

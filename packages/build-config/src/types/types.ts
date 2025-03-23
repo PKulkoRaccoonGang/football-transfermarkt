@@ -13,4 +13,7 @@ export interface BuildOptions {
 	paths: BuildPaths;
 	mode: BuildMode;
 	analyzer?: boolean;
+	output?: {
+		publicPath: string;
+	};
 }
