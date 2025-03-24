@@ -6,4 +6,5 @@ export interface ButtonLinkProps {
 	className?: string;
 	hasIcon?: boolean;
   children: React.ReactNode;
+	disabled?: boolean;
 }

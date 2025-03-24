@@ -4,6 +4,9 @@ import type { Team } from '@/types';
 import { fetchTeamsOrTeam } from '../api/teamsApi';
 import { useStore } from '../store';
 
+type TeamsQueryKey = ['teams'];
+type TeamQueryKey = ['team', number];
+
 /**
  * Custom hook for fetching and managing teams data.
  *
@@ -13,24 +16,63 @@ import { useStore } from '../store';
  */
 export const useTeams = (
 	id: number | null = null,
-	options?: UseQueryOptions<Team[], Error, Team[], string[]> | UseQueryOptions<Team, Error, Team, string[]>,
+	options?: UseQueryOptions<Team[], Error, Team[], string[]>,
 ): ReturnType<typeof useQuery> => {
 	const { setTeams } = useStore();
 	const queryKey = id !== null ? ['team', id] : ['teams'];
 
-	const queryFn = async ({ queryKey }: QueryFunctionContext<string[]>): Promise<Team | Team[]> => {
+	const queryFn = async ({ queryKey }: QueryFunctionContext<string[]>): Promise<Team[]> => {
 		const [, teamId] = queryKey;
-		return fetchTeamsOrTeam(teamId ? Number.parseInt(teamId) : null);
+		const result = await fetchTeamsOrTeam(teamId ? Number.parseInt(teamId) : null);
+		const teams = Array.isArray(result) ? result : [result];
+		setTeams(teams);
+		return teams;
 	};
 
 	return useQuery({
 		queryKey,
 		queryFn,
-		onSuccess: (data: Team[]) => {
-			if (Array.isArray(data)) {
-				setTeams(data); // Handles when data is an array of teams
-			}
-		},
-		...options, // Type assertion to bypass potential mismatched typing
-	});
+		...options,
+	} as UseQueryOptions<Team[], Error, Team[], string[]>);
+};
+
+export const useTeamsList = (
+	options?: Omit<UseQueryOptions<Team[], Error, Team[], TeamsQueryKey>, 'queryKey' | 'queryFn'>,
+): ReturnType<typeof useQuery> => {
+	const { setTeams } = useStore();
+	const queryKey: TeamsQueryKey = ['teams'];
+
+	const queryFn = async (): Promise<Team[]> => {
+		const result = await fetchTeamsOrTeam(null);
+		const teams = Array.isArray(result) ? result : [result];
+		setTeams(teams);
+		return teams;
+	};
+
+	return useQuery({
+		queryKey,
+		queryFn,
+		...options,
+	} as UseQueryOptions<Team[], Error, Team[], TeamsQueryKey>);
+};
+
+export const useTeam = (
+	id: number,
+	options?: Omit<UseQueryOptions<Team, Error, Team, TeamQueryKey>, 'queryKey' | 'queryFn'>,
+): ReturnType<typeof useQuery> => {
+	const { setTeam } = useStore();
+	const queryKey: TeamQueryKey = ['team', id];
+
+	const queryFn = async (): Promise<Team> => {
+		const result = await fetchTeamsOrTeam(id);
+		const team = Array.isArray(result) ? result[0] : result;
+		setTeam(team);
+		return team;
+	};
+
+	return useQuery({
+		queryKey,
+		queryFn,
+		...options,
+	} as UseQueryOptions<Team, Error, Team, TeamQueryKey>);
 };
