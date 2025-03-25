@@ -32,7 +32,7 @@ export default (env: EnvVariables) => {
 		analyzer: env.analyzer,
 		output: {
 			publicPath: 'auto',
-		}
+		},
 	});
 
 	config.plugins.push(
@@ -49,18 +49,18 @@ export default (env: EnvVariables) => {
 				react: {
 					singleton: true,
 					eager: true,
-					requiredVersion: packageJson.dependencies.react
+					requiredVersion: packageJson.dependencies.react,
 				},
 				'react-router-dom': {
 					singleton: true,
 					eager: true,
-					requiredVersion: packageJson.dependencies['react-router-dom']
+					requiredVersion: packageJson.dependencies['react-router-dom'],
 				},
 				'react-dom': {
 					singleton: true,
 					eager: true,
-					requiredVersion: packageJson.dependencies['react-dom']
-				}
+					requiredVersion: packageJson.dependencies['react-dom'],
+				},
 			},
 		}),
 	);

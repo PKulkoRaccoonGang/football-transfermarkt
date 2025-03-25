@@ -4,8 +4,20 @@
     "outDir": "./dist/",
     "baseUrl": ".",
     "paths": {
+      "player/*": [
+        "../player/src/*"
+      ],
+      "clubs/*": [
+        "../clubs/src/*"
+      ],
+      "authn/*": [
+        "../authn/src/*"
+      ],
       "@/*": [
-        "./src/*"
+        "./src/*",
+        "../clubs/src/*",
+        "../player/src/*",
+        "../authn/src/*"
       ]
     }
   }
