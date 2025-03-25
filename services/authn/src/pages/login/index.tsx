@@ -21,9 +21,10 @@ const Login = (): JSX.Element => {
 		try {
 			setErrorMessage(null);
 			await loginUser(data);
-			window.location.href = "http://localhost:3000/clubs";
+			window.location.href = 'http://localhost:3000/clubs';
 		} catch (error) {
 			setErrorMessage('Login failed. Please check your credentials.');
+			console.error(error);
 		}
 	};
 
@@ -56,8 +57,8 @@ const Login = (): JSX.Element => {
 							<Form.Control.Feedback type="invalid">{errors.password?.message}</Form.Control.Feedback>
 						</Form.Group>
 
-            <ButtonLink className="w-100" type="button" disabled={isSubmitting}>
-              {isSubmitting ? 'Logging in...' : 'Login'}
+						<ButtonLink className="w-100" type="button" disabled={isSubmitting}>
+							{isSubmitting ? 'Logging in...' : 'Login'}
 						</ButtonLink>
 					</Form>
 				</Col>

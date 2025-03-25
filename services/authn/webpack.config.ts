@@ -57,7 +57,7 @@ export default (env: EnvVariables) => {
 				zustand: {
 					singleton: true,
 					requiredVersion: packageJson.dependencies.zustand,
-				}
+				},
 			},
 		}),
 	);
