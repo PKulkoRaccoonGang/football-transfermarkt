@@ -21,9 +21,10 @@ const Register = (): JSX.Element => {
 		try {
 			setErrorMessage(null);
 			await registerNewUser(data);
-			window.location.href = "http://localhost:3000/clubs";
+			window.location.href = 'http://localhost:3000/clubs';
 		} catch (error) {
 			setErrorMessage('Registration failed. Please try again.');
+			console.error(error);
 		}
 	};
 
@@ -47,12 +48,7 @@ const Register = (): JSX.Element => {
 
 						<Form.Group controlId="email" className="mt-3">
 							<Form.Label>Email address</Form.Label>
-							<Form.Control
-								type="email"
-								placeholder="Enter email"
-								{...register('email')}
-								isInvalid={!!errors.email}
-							/>
+							<Form.Control type="email" placeholder="Enter email" {...register('email')} isInvalid={!!errors.email} />
 							<Form.Control.Feedback type="invalid">{errors.email?.message}</Form.Control.Feedback>
 						</Form.Group>
 
