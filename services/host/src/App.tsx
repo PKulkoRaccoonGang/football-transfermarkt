@@ -13,7 +13,6 @@ export const App = () => {
 					<Outlet />
 				</Container>
 			</main>
-
 			<Footer />
 		</div>
 	);

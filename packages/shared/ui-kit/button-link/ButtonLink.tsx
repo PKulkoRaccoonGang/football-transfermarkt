@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-import { ButtonLinkProps } from './ButtonLink.types';
+import type { ButtonLinkProps } from './ButtonLink.types';
 
 import './ButtonLink.scss';
 
@@ -19,7 +19,7 @@ export const ButtonLink: React.FC<ButtonLinkProps> = ({
 
 	if (type === 'button') {
 		return (
-			<Button className={buttonClass} onClick={onClick} disabled={disabled} type='submit'>
+			<Button className={buttonClass} onClick={onClick} disabled={disabled} type="submit">
 				{hasIcon && <span className="ball-icon">⚽</span>}
 				{children}
 			</Button>

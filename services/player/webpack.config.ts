@@ -1,6 +1,8 @@
 import path from 'node:path';
 import webpack from 'webpack';
+
 import { type BuildMode, type BuildPaths, buildWebpack } from '@packages/build-config';
+
 import packageJson from './package.json';
 
 interface EnvVariables {

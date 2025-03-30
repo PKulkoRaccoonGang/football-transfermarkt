@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
  * @returns {string} - The appropriate title for the current route.
  *
  */
-export const getTitle = () => {
+export const getTitle = (): string => {
 	const location = useLocation();
 
 	if (location.pathname === '/clubs') {

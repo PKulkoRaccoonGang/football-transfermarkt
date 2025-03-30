@@ -28,9 +28,9 @@ export const useTeams = (
 		queryFn,
 		onSuccess: (data: Team[]) => {
 			if (Array.isArray(data)) {
-				setTeams(data); // Handles when data is an array of teams
+				setTeams(data);
 			}
 		},
-		...options, // Type assertion to bypass potential mismatched typing
+		...options,
 	});
 };

@@ -3,10 +3,11 @@ import { useParams } from 'react-router-dom';
 import { Image, Row, Col, Alert } from 'react-bootstrap';
 
 import { Loader, AlertMessage } from '@packages/shared/ui-kit';
+
 import { usePlayer } from '../../data/hooks/usePlayer';
+import type { Player as PlayerTypes } from '../../types';
 import { PlayerModal, PlayerDetails, PlayerActions, PlayerHighlights, PlayerStatsChart } from './components';
 import { useConfetti } from './hooks';
-import type { Player as PlayerTypes } from '../../types';
 
 const Player = () => {
 	const { id } = useParams();

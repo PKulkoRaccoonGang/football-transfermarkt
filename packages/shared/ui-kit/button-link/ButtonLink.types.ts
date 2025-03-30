@@ -5,5 +5,6 @@ export interface ButtonLinkProps {
 	onClick?: () => void;
 	className?: string;
 	hasIcon?: boolean;
-  children: React.ReactNode;
+	children: React.ReactNode;
+	disabled?: boolean;
 }

@@ -1,8 +1,8 @@
 import { Modal } from 'react-bootstrap';
 
-import type { PlayerModalProps } from './types';
-
 import { ButtonLink } from '@packages/shared/ui-kit';
+
+import type { PlayerModalProps } from './types';
 
 const PlayerModal: React.FC<PlayerModalProps> = ({
 	showModal,

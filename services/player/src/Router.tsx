@@ -1,9 +1,10 @@
 import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
-import { App } from './App';
 import { Player } from '@/pages/player';
 import { Loader } from '@packages/shared/ui-kit';
+
+import { App } from './App';
 
 const routes = [
 	{
