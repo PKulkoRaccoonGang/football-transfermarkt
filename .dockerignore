@@ -10,9 +10,5 @@ node_modules
 .vscode
 README.md
 **/coverage
-**/.next
-**/.turbo
 **/.cache
 npm-debug.log
-yarn-debug.log
-yarn-error.log

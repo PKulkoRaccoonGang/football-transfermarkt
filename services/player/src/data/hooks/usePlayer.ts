@@ -29,11 +29,10 @@ export const usePlayer = (id: number | null = null, options?: UsePlayerOptions):
 		queryKey,
 		queryFn,
 		onSuccess: (data: Team[]) => {
-			console.log('============= DATA =============', data);
 			if (Array.isArray(data)) {
-				setPlayer(data); // Handles when data is an array of teams
+				setPlayer(data);
 			}
 		},
-		...options, // Type assertion to bypass potential mismatched typing
+		...options,
 	});
 };

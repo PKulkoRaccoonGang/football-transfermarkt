@@ -31,6 +31,9 @@
         "noUnusedImports": "error",
         "noUnusedVariables": "error",
         "useJsxKeyInIterable": "error"
+      },
+      "suspicious": {
+        "noConsoleLog": "error"
       }
     }
   },

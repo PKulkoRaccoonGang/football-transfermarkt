@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Form, Alert, Container, Row, Col } from 'react-bootstrap';
+
 import { ButtonLink } from '@packages/shared/ui-kit';
+
 import { registerNewUser } from '../../data/api/authnApi';
 import { schema } from './validation';
 

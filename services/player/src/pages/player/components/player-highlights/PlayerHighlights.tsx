@@ -1,7 +1,8 @@
 import { useEffect, useState, useMemo } from 'react';
 
-import { fetchVideo } from '../../../../data/api/teamsApi';
 import { Loader, AlertMessage } from '@packages/shared/ui-kit';
+
+import { fetchVideo } from '../../../../data/api/teamsApi';
 
 interface PlayerHighlightsProps {
 	playerName: string;

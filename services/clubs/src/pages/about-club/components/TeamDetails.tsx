@@ -1,4 +1,5 @@
 import { ButtonLink } from '@packages/shared/ui-kit';
+
 import type { Team } from '@/types';
 
 type TeamDetailsComponentProps = {

@@ -1,11 +1,12 @@
+import path from 'node:path';
+import dotenv from 'dotenv';
 import webpack, { type Configuration, DefinePlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import type { BuildOptions } from './types/types';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
-import path from 'node:path';
-import dotenv from 'dotenv';
+
+import type { BuildOptions } from './types/types';
 
 dotenv.config();
 
@@ -23,8 +24,8 @@ export function buildPlugins({ mode, paths, analyzer }: BuildOptions): Configura
 			__ENV__: JSON.stringify(mode),
 		}),
 		new DefinePlugin({
-      'process.env': JSON.stringify(process.env),
-    }),
+			'process.env': JSON.stringify(process.env),
+		}),
 	];
 
 	if (isDev) {
