@@ -6,15 +6,7 @@
   "scripts": {
     "docker:build": "docker-compose build",
     "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down",
-    "docker:logs": "docker-compose logs -f",
-    "docker:prune": "docker system prune -af",
-    "docker:restart": "docker-compose restart",
-    "docker:rebuild": "npm run docker:down && npm run docker:prune && npm run docker:build && npm run docker:up",
-    "docker:clean": "docker system prune --volumes -f",
-    "docker:stats": "docker stats",
-    "docker:inspect": "docker-compose ps",
-    "docker:logs:all": "docker-compose logs -f --tail=100"
+    "docker:restart": "docker-compose restart"
   },
   "workspaces": [
     "packages/*",

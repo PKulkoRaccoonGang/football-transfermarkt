@@ -80,7 +80,7 @@ export default (env: EnvVariables) => {
 				'react-chartjs-2': {
 					singleton: true,
 					requiredVersion: packageJson.dependencies['react-chartjs-2'],
-				}
+				},
 			},
 		}),
 	);

@@ -12,10 +12,6 @@ export const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <App />,
-		children: [
-			...playerRoutes,
-			...clubsRoutes,
-			...authnRoutes,
-		],
+		children: [...playerRoutes, ...clubsRoutes, ...authnRoutes],
 	},
 ]);
