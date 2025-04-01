@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
-import type { FC } from 'react';
 
 import type { PlayerDetailsProps } from './types';
 import { calculateAge } from './utils';
+
+import type { FC } from 'react';
 
 const PlayerDetails: FC<PlayerDetailsProps> = ({ playerData }) => {
 	const formattedMarketValue = useMemo(

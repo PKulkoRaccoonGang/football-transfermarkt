@@ -4,16 +4,9 @@ import { Loader, AlertMessage } from '@packages/shared/ui-kit';
 
 import { fetchVideo } from '../../../../data/api/teamsApi';
 
-interface PlayerHighlightsProps {
-	playerName: string;
-}
+import type { PlayerHighlightsProps, VideoData } from './types';
 
 const PlayerHighlights = ({ playerName }: PlayerHighlightsProps) => {
-	interface VideoData {
-		videoId: string;
-		title: string;
-	}
-
 	const [videoParams, setVideoParams] = useState<VideoData | null>(null);
 	const [error, setError] = useState<string | null>(null);
 

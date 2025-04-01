@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 
-import type { Team } from '@/types';
 import type { StoreState } from './store.types';
+
+import type { Team } from '@/types';
 
 export const useStore = create<StoreState>((set) => ({
 	teams: [],

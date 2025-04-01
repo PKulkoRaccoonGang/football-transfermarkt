@@ -1,10 +1,6 @@
 import { placeholderImage } from '../../constants';
 
-type TeamImageComponentProps = {
-	imageSrc?: string;
-	teamName: string;
-	onError?: React.ReactEventHandler<HTMLImageElement>;
-};
+import type { TeamImageComponentProps } from './types';
 
 const TeamImage: React.FC<TeamImageComponentProps> = ({ imageSrc, teamName, onError }) => {
 	return (

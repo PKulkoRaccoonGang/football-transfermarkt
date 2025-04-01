@@ -1,6 +1,6 @@
-import type { FC } from 'react';
 import { Accordion } from 'react-bootstrap';
 
+import type { FC } from 'react';
 import type { PlayerStatsChartContainerProps } from './types';
 
 const PlayerStatsChartContainer: FC<PlayerStatsChartContainerProps> = ({

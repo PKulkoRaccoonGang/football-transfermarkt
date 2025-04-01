@@ -2,13 +2,10 @@ import { Table } from 'react-bootstrap';
 
 import { ButtonLink } from '@packages/shared/ui-kit';
 
-import type { Team } from '@/types';
 import { placeholderImage } from '../../constants';
 
-type TeamPlayersComponentProps = {
-	team: Team;
-	onError?: React.ReactEventHandler<HTMLImageElement>;
-};
+import type { Team } from '@/types';
+import type { TeamPlayersComponentProps } from './types';
 
 const TeamPlayers: React.FC<TeamPlayersComponentProps> = ({ team, onError }) => {
 	const renderPlayerRow = (player: Team['players'][number]) => (
