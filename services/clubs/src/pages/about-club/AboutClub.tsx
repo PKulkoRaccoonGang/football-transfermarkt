@@ -4,9 +4,10 @@ import { Row, Col } from 'react-bootstrap';
 
 import { Loader, AlertMessage } from '@packages/shared/ui-kit';
 
-import { useTeams } from '../../data/hooks/useTeams';
+import { useTeam } from '../../data/hooks/useTeam';
 import { TeamImage, TeamDetails, TeamPlayers } from './components';
 import { placeholderImage } from '../constants';
+
 import type { Team } from '../../types';
 
 const BASE_PAGE_PRIMARY_COLOR = '#1d3557';
@@ -14,7 +15,7 @@ const BASE_PAGE_PRIMARY_COLOR = '#1d3557';
 const AboutClub = () => {
 	const { id } = useParams();
 	const teamId = Number.isNaN(Number(id)) ? null : Number.parseInt(id, 10);
-	const { data, isLoading, isError } = useTeams(teamId);
+	const { data, isLoading, isError } = useTeam(teamId);
 
 	const teamData = data && typeof data === 'object' ? (data as Team) : null;
 

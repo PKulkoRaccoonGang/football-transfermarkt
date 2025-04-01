@@ -1,17 +1,15 @@
 import { ButtonLink } from '@packages/shared/ui-kit';
 
-import type { Team } from '@/types';
+import { GOOGLE_MAPS_QUERY_URL, WIKIPEDIA_SEARCH_URL } from './constants';
 
-type TeamDetailsComponentProps = {
-	team: Team;
-};
+import type { TeamDetailsComponentProps } from './types';
 
 const TeamDetails: React.FC<TeamDetailsComponentProps> = ({ team }) => {
 	const renderField = (label: string, value?: string | number, isLink = false) => {
 		if (!value) return null;
 		const content = isLink ? (
 			<a
-				href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(value.toString())}`}
+				href={`${GOOGLE_MAPS_QUERY_URL}${encodeURIComponent(value.toString())}`}
 				target="_blank"
 				rel="noopener noreferrer"
 				className="stadium-link"
@@ -41,7 +39,7 @@ const TeamDetails: React.FC<TeamDetailsComponentProps> = ({ team }) => {
 				<p>
 					<strong>Head Coach:</strong>{' '}
 					<a
-						href={`https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(team.coach)}`}
+						href={`${WIKIPEDIA_SEARCH_URL}${encodeURIComponent(team.coach)}`}
 						target="_blank"
 						rel="noopener noreferrer"
 						className="coach-link"

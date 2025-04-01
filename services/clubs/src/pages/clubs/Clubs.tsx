@@ -1,10 +1,11 @@
 import { Row, Col, Card, Badge, Stack } from 'react-bootstrap';
 
 import { ButtonLink, Loader, AlertMessage } from '@packages/shared/ui-kit';
-import type { Team } from '@/types';
 
 import { useTeams } from '../../data/hooks/useTeams';
 import { placeholderImage } from '../constants';
+
+import type { Team } from '@/types';
 
 const Clubs = () => {
 	const { data, isLoading, isError } = useTeams();

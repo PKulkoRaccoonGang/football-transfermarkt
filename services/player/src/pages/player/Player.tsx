@@ -5,9 +5,10 @@ import { Image, Row, Col, Alert } from 'react-bootstrap';
 import { Loader, AlertMessage } from '@packages/shared/ui-kit';
 
 import { usePlayer } from '../../data/hooks/usePlayer';
-import type { Player as PlayerTypes } from '../../types';
 import { PlayerModal, PlayerDetails, PlayerActions, PlayerHighlights, PlayerStatsChart } from './components';
 import { useConfetti } from './hooks';
+
+import type { Player as PlayerTypes } from '../../types';
 
 const Player = () => {
 	const { id } = useParams();
@@ -66,7 +67,6 @@ const Player = () => {
 					{notification}
 				</Alert>
 			)}
-
 			<div className="player-container">
 				<Row className="align-items-center">
 					<Col md={4} className="text-center">
@@ -86,19 +86,16 @@ const Player = () => {
 						<PlayerStatsChart stats={playerDetails} />
 					</Col>
 				</Row>
-
 				<Row className="mt-5">
 					<Col>
 						<PlayerHighlights playerName={`${playerDetails.firstName ?? ''} ${playerDetails.lastName ?? ''}`} />
 					</Col>
 				</Row>
-
 				<Row className="mt-5">
 					<Col className="text-center">
 						<PlayerActions handleBuyPlayer={() => handleAction('buy')} handleSellPlayer={() => handleAction('sell')} />
 					</Col>
 				</Row>
-
 				<PlayerModal
 					showModal={showModal}
 					handleCloseModal={handleCloseModal}

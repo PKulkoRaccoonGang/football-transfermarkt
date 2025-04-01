@@ -1,6 +1,17 @@
 import { create } from 'zustand';
 
-export const useAuthStore = create((set) => ({
+interface User {
+	id: string;
+	email: string;
+}
+
+interface AuthStore {
+	user: User | null;
+	setUser: (userData: User | null) => void;
+	logout: () => void;
+}
+
+export const useAuthStore = create<AuthStore>((set) => ({
 	user: null,
 	setUser: (userData) => set({ user: userData }),
 	logout: () => {

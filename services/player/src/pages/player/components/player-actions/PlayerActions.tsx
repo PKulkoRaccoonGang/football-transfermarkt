@@ -1,8 +1,8 @@
-import type { FC } from 'react';
 import { Stack } from 'react-bootstrap';
 
 import { ButtonLink } from '@packages/shared/ui-kit';
 
+import type { FC } from 'react';
 import type { PlayerActionsProps } from './types';
 
 const PlayerActions: FC<PlayerActionsProps> = ({ handleBuyPlayer, handleSellPlayer }) => {

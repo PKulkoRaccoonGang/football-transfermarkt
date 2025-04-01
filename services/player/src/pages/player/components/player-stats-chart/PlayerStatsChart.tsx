@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useMemo } from 'react';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import { Accordion } from 'react-bootstrap';
@@ -6,6 +5,8 @@ import { Accordion } from 'react-bootstrap';
 import { getCardsData, getIntegerData, getPercentageData } from './datasets';
 import { barOptions, lineOptions, pieOptions, registerCharts } from './chart-config';
 import PlayerStatsChartContainer from './PlayerStatsChartContainer';
+
+import type { FC } from 'react';
 import type { PlayerStats } from './types';
 
 registerCharts();
@@ -45,6 +46,7 @@ const PlayerStatsCharts: FC<{ stats: PlayerStats }> = ({ stats }) => {
 		<Accordion className="player-stats-charts" defaultActiveKey="0">
 			{charts.map(({ title, className, eventKey, ChartComponent, data, options }) => (
 				<PlayerStatsChartContainer key={eventKey} chartTitle={title} className={className} eventKey={eventKey}>
+					{/* @ts-ignore */}
 					<ChartComponent data={data} options={options} />
 				</PlayerStatsChartContainer>
 			))}

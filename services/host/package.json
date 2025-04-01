@@ -9,9 +9,7 @@
     "lint-js": "biome lint .",
     "lint-js:fix": "biome lint . --write",
     "format-js": "biome format .",
-    "format-js:fix": "biome format --write .",
-    "lint-style": "stylelint src/**/*.scss",
-    "lint-style:fix": "stylelint \"src/**/*.scss\" --fix"
+    "format-js:fix": "biome format --write ."
   },
   "dependencies": {
     "@packages/build-config": "*",

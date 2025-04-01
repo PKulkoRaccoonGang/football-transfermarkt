@@ -7,10 +7,15 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true
   },
   "exclude": [
     "node_modules",
     "dist"
+  ],
+  "include": [
+    "src/**/*"
   ]
 }

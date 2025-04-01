@@ -6,14 +6,13 @@ const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
 
 export const registerNewUser = async (data: { userName: string; email: string; password: string }) => {
 	try {
-		const url = `${BASE_API_URL}authn/register/`;
 		const preparedData = {
 			username: data.userName,
 			email: data.email,
 			password: data.password,
 		};
 
-		const response = await axios.post(url, preparedData);
+		const response = await axios.post(`${BASE_API_URL}authn/register/`, preparedData);
 		const responseData = convertToCamelCase(response.data);
 
 		localStorage.setItem('access_token', responseData.access);
@@ -28,12 +27,11 @@ export const registerNewUser = async (data: { userName: string; email: string; p
 
 export const fetchUserData = async () => {
 	try {
-		const url = `${BASE_API_URL}authn/user/`;
 		const accessToken = localStorage.getItem('access_token');
 
 		if (!accessToken) throw new Error('No access token found');
 
-		const response = await axios.get(url, {
+		const response = await axios.get(`${BASE_API_URL}authn/user/`, {
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
 			},
@@ -48,13 +46,12 @@ export const fetchUserData = async () => {
 
 export const loginUser = async (data: { userName: string; password: string }) => {
 	try {
-		const url = `${BASE_API_URL}authn/token/`;
 		const preparedData = {
 			username: data.userName,
 			password: data.password,
 		};
 
-		const response = await axios.post(url, preparedData);
+		const response = await axios.post(`${BASE_API_URL}authn/token/`, preparedData);
 		const responseData = response.data;
 
 		localStorage.setItem('access_token', responseData.access);
